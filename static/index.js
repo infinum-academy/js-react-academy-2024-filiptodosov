@@ -1,14 +1,55 @@
 let reviews = [];
 
-let sum = 0;
+const initializeWebpage = () =>{
+    if(localStorage.getItem("reviews") !== null){
+        reviews = JSON.parse(localStorage.getItem("reviews"));
+    }
+    
+    reviews.forEach(item => {
+        updateAverage();
+        document.querySelector("#submittedReviews").appendChild(createItem(item));
+    })
+}
 
-if(localStorage.getItem("reviews") !== null) reviews = JSON.parse(localStorage.getItem("reviews"));
-
+const saveReviews = () =>{
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+}
 
 
 const updateAverage = () =>{
-    document.querySelector("#averageRating").innerText = `${Math.round(sum / reviews.length * 10) / 10}/5`;
+    let sum = 0;
+
+    reviews.forEach(item => {
+        sum += item.rating;
+    })
+
+    document.querySelector("#averageRating").innerText = reviews.length == 0 ? "No rating" :  `${Math.round(sum / reviews.length * 10) / 10}/5`;
+    if(reviews.length == 0){
+
+    }
 }
+
+
+
+const deleteButtonHandler = (e)=>{
+    for(let rev in reviews){
+
+        if(e.id.split('-')[2] == reviews[rev].id) {
+            reviews.splice(rev, 1);
+            break;
+        }
+        
+    }
+
+    saveReviews();
+
+    updateAverage();
+
+    const currentItem = e.parentElement;
+    currentItem.parentElement.removeChild(currentItem);
+}
+
+
 
 const createItem = (item) => {
     let reviewItem = document.createElement("div");
@@ -20,47 +61,18 @@ const createItem = (item) => {
 
     let deleteButton = document.createElement("button");
     deleteButton.innerText = "Delete";
-    deleteButton.id = `item-${item.id}`;
+    deleteButton.id = `button-delete-${item.id}`;
     
+    deleteButton.setAttribute("onclick", "deleteButtonHandler(this)");
+
     updateAverage();
 
-    deleteButton.addEventListener("click", (e)=>{
-        for(let rev in reviews){
-            console.log(`${e.target.id.split('-')[1] } VS..... ${reviews[rev].id}`)
 
-            if(e.target.id.split('-')[1] == reviews[rev].id) {
-                sum -= reviews[rev].rating;
-                console.log("brisam", reviews[rev]);
-                reviews.splice(rev, 1);
-                break;
-            }
-            
-        }
-    
-        localStorage.setItem("reviews", JSON.stringify(reviews));
-
-        updateAverage();
-
-        const currentItem = e.target.parentElement;
-        currentItem.parentElement.removeChild(currentItem);
-
-
-        console.log(reviews);
-
-    })
 
     reviewItem.append(reviewText, ratingText, deleteButton);
 
     return reviewItem;
 }
-
-
-reviews.forEach(item => {
-    sum += item.rating;
-    document.querySelector("#submittedReviews").appendChild(createItem(item));
-})
-updateAverage();
-
 
 document.querySelector("#postButton").addEventListener("click", ()=>{
 
@@ -70,13 +82,21 @@ document.querySelector("#postButton").addEventListener("click", ()=>{
         id: reviews.length
     };
 
-    sum +=newItem.rating;
+    if(newItem.review != "" && typeof newItem.rating === 'number' && isFinite(newItem.rating)){
+        
+        reviews.push(newItem);
+        saveReviews();
 
-    reviews.push(newItem);
-    localStorage.setItem("reviews", JSON.stringify(reviews));
+        document.querySelector("#submittedReviews").appendChild(createItem(newItem));
+        document.querySelector("#review").value = "";
+        document.querySelector("#rating").value = "";
+    
+    }
 
-    document.querySelector("#submittedReviews").appendChild(createItem(newItem));
-    document.querySelector("#review").value = "";
-    document.querySelector("#rating").value = "";
+    else {
+        alert("Both fields are mandatory!");
+    }
 
 })
+
+initializeWebpage();
