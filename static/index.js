@@ -74,8 +74,8 @@ const createItem = (item) => {
     return reviewItem;
 }
 
-document.querySelector("#postButton").addEventListener("click", ()=>{
 
+const postReview = () =>{
     const newItem = {
         review: document.querySelector("#review").value,
         rating: parseInt(document.querySelector("#rating").value, 10),
@@ -96,7 +96,6 @@ document.querySelector("#postButton").addEventListener("click", ()=>{
     else {
         alert("Both fields are mandatory!");
     }
-
-})
+}
 
 initializeWebpage();
