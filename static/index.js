@@ -6,9 +6,10 @@ const initializeWebpage = () =>{
     }
     
     reviews.forEach(item => {
-        updateAverage();
         document.querySelector("#submittedReviews").appendChild(createItem(item));
     })
+
+    updateAverage();
 }
 
 const saveReviews = () =>{
