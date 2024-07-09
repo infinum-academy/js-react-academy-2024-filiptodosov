@@ -1,6 +1,6 @@
 export interface IReviewItem {
     reviewText: string,
-    rating?: number
+    rating: number
 }
 
 export interface IReviewItemProps {

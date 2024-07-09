@@ -5,7 +5,7 @@ import { ShowDetails } from "./components/features/shows/ShowDetails/ShowDetails
 import { ShowReviewSection } from "./components/features/shows/ShowReviewSection/ShowReviewSection";
 
 import { IReviewItem } from "../typings/ReviewItem.type";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 let mockReviewItems: Array<IReviewItem> = [
   {
@@ -35,29 +35,54 @@ let mockReviewItems: Array<IReviewItem> = [
   },
 ];
 
-let reviewItemsLocal: Array<IReviewItem> = JSON.parse(
-  localStorage.getItem("reviewItems")
-);
-
-const calculateAverageRating = (reviewItems: Array<IReviewItem>) => {
-  let sumOfReviews = 0;
-
-  reviewItems.map((reviewItem) => {
-    sumOfReviews += reviewItem.rating;
-  });
-
-  return Math.round((sumOfReviews / reviewItems.length) * 10) / 10;
-};
 
 export default function Home() {
-  if (reviewItemsLocal == undefined) {
-    reviewItemsLocal = mockReviewItems;
+  
+  const loadFromLocalStorage = (): Array <IReviewItem> => {
+    let reviewItemsLocal: Array<IReviewItem> = JSON.parse(
+      localStorage.getItem("reviewItems")
+    );
+
+    if (!reviewItemsLocal){
+      return mockReviewItems;
+    }
+
+    return reviewItemsLocal;
   }
 
-  let [reviewItems, setReviewItems] = useState(reviewItemsLocal);
+  const saveToLocalStorage = (newReviewItems: Array<IReviewItem>) => {
+    localStorage.setItem(
+      "reviewItems",
+      JSON.stringify(newReviewItems)
+    );
+  }
+
+  const calculateAverageRating = (reviewItems: Array<IReviewItem>) => {
+    let sumOfReviews = 0;
+
+    reviewItems.map((reviewItem: IReviewItem) => {
+      sumOfReviews += reviewItem.rating;
+    });
+
+    return Math.round((sumOfReviews / reviewItems.length) * 10) / 10;
+  };
+
+  useEffect(()=>{
+
+    let reviewItemsLocal = loadFromLocalStorage();
+    setReviewItems(reviewItemsLocal);
+  }, []);
+
+
+  let [reviewItems, setReviewItems] = useState(Array <IReviewItem>);
   let [averageRating, setAverageRating] = useState(
     calculateAverageRating(reviewItems)
   );
+
+  useEffect(()=>{
+    setAverageRating(calculateAverageRating(reviewItems));
+  }, [reviewItems]);
+
 
   const addShowReview = () => {
     const newReviewItem: IReviewItem = {
@@ -65,16 +90,14 @@ export default function Home() {
       rating: parseInt(document.getElementById("reviewRating").value, 10),
     };
 
+    const newReviewItems = [...reviewItems, newReviewItem];
     if (newReviewItem.rating && newReviewItem.reviewText) {
-      localStorage.setItem(
-        "reviewItems",
-        JSON.stringify([...reviewItems, newReviewItem])
-      );
-      setAverageRating(calculateAverageRating([...reviewItems, newReviewItem]));
+      saveToLocalStorage(newReviewItems);
+      setReviewItems(newReviewItems);
 
-      setReviewItems([...reviewItems, newReviewItem]);
       document.getElementById("reviewDescription").value = "";
       document.getElementById("reviewRating").value = "";
+
       alert("New review has been added.");
     } else {
       alert("Both fields are mandatory.");
