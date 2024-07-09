@@ -76,14 +76,6 @@ export default function ShowContainer() {
 
 
   let [reviewItems, setReviewItems] = useState(Array <IReviewItem>);
-  let [averageRating, setAverageRating] = useState(
-    calculateAverageRating(reviewItems)
-  );
-
-  useEffect(()=>{
-    setAverageRating(calculateAverageRating(reviewItems));
-  }, [reviewItems]);
-
 
   const addShowReview = () => {
     const newReviewItem: IReviewItem = {
@@ -113,7 +105,7 @@ export default function ShowContainer() {
     description:
       "Comedy series following the exploits of Det. Jake Peralta and his diverse, lovable colleagues as they police the NYPD's 99th Precinct.",
     reviewList: reviewItems,
-    averageRating: averageRating,
+    averageRating: calculateAverageRating(reviewItems),
   }
 
   return (
