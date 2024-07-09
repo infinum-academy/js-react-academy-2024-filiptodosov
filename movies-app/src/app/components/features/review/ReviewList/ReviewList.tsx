@@ -12,9 +12,9 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react";
-import { ReviewItem } from "../../review/ReviewItem/ReviewItem";
+import { ReviewItem } from "../ReviewItem/ReviewItem";
 
-import { IReviewListProps } from "../../../typings/ReviewList.type";
+import { IReviewListProps } from "../../../../../typings/ReviewList.type";
 
 export const ReviewList = ({ reviewList }: IReviewListProps) => {
   return (

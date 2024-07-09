@@ -1,8 +1,8 @@
 "use client";
 
 import styles from "./page.module.css";
-import { ShowDetails } from "../features/shows/ShowDetails/ShowDetails";
-import { ShowReviewSection } from "../features/shows/ShowReviewSection/ShowReviewSection";
+import { ShowDetails } from "./components/features/shows/ShowDetails/ShowDetails";
+import { ShowReviewSection } from "./components/features/shows/ShowReviewSection/ShowReviewSection";
 
 import { IReviewItem } from "../typings/ReviewItem.type";
 import React, { useState } from "react";

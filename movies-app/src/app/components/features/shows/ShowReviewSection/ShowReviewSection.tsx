@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { ReviewList } from "../../review/ReviewList/ReviewList";
 import { ReviewForm } from "../ReviewForm/ReviewForm";
-import { IReviewListProps } from "../../../typings/ReviewList.type";
+import { IReviewListProps } from "../../../../../typings/ReviewList.type";
 
 export const ShowReviewSection = ({
   reviewList,
@@ -21,9 +21,6 @@ export const ShowReviewSection = ({
   return (
     <Flex>
       <Card width="600px">
-        {/* <CardHeader>
-                <Heading size='lg'>Review section</Heading>
-            </CardHeader> */}
         <CardBody>
           <ReviewForm addShowReview={addShowReview} />
           <hr />

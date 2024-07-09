@@ -1,5 +1,5 @@
 import { Heading, Box, Text } from '@chakra-ui/react'
-import { IReviewItemProps, IReviewItem } from "../../../typings/ReviewItem.type";
+import { IReviewItemProps, IReviewItem } from "../../../../../typings/ReviewItem.type";
 
 export const ReviewItem = ({reviewItem}: IReviewItemProps) => {
     return (
