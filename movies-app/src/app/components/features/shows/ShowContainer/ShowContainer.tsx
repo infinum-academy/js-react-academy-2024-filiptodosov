@@ -119,8 +119,9 @@ export default function ShowContainer() {
   return (
     <>
       <ShowDetails
-        show={}
+        show={showExample}
       ></ShowDetails>
+      
       <ShowReviewSection
         reviewList={reviewItems}
         addShowReview={addShowReview}
