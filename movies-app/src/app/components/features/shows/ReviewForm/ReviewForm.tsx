@@ -15,12 +15,12 @@ import {
 import { IReviewItem } from "../../../../../typings/ReviewItem.type";
 
 interface IReviewFormProps {
-  addShowReview: (reviewItem: IReviewItem) => void;
+  addShowReview: (reviewItem: IReviewItem) => void,
 }
 
 export const ReviewForm = ({ addShowReview }: IReviewFormProps) => {
 
-  const onClickHandler = () => {
+  const onClickAddShowHandler = () => {
     
     const reviewDescriptionHTMLElement = document.getElementById("reviewDescription") as HTMLTextAreaElement;
     const reviewRatingHTMLElement = document.getElementById("reviewRating") as HTMLInputElement;
@@ -56,7 +56,7 @@ export const ReviewForm = ({ addShowReview }: IReviewFormProps) => {
           <NumberDecrementStepper />
         </NumberInputStepper>
       </NumberInput>
-      <Button marginTop="2" colorScheme="blue" onClick={onClickHandler}>
+      <Button marginTop="2" colorScheme="blue" onClick={onClickAddShowHandler}>
         Submit review
       </Button>
     </Box>

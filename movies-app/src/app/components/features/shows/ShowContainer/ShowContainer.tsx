@@ -41,7 +41,7 @@ export default function ShowContainer() {
 
   const loadFromLocalStorage = (): Array <IReviewItem> => {
     let reviewItemsLocal: Array<IReviewItem> = JSON.parse(
-      localStorage.getItem("reviewItems")
+      localStorage.getItem("reviewItems") as string
     );
 
     if (!reviewItemsLocal){
@@ -89,6 +89,17 @@ export default function ShowContainer() {
     }
   };
 
+  const deleteShowReview = (key: number) => {
+    let currentItems = [...reviewItems];
+
+      currentItems.splice(key, 1);
+
+      saveToLocalStorage(currentItems);
+      setReviewItems(currentItems);
+
+      alert("Item was deleted.");
+    
+  };
 
   let showExample: IShow = {
     image_url:
@@ -108,7 +119,8 @@ export default function ShowContainer() {
       
       <ShowReviewSection
         reviewList={reviewItems}
-        addShowReview={addShowReview}
+        addShowReview={addShowReview} 
+        deleteShowReview={deleteShowReview}
       ></ShowReviewSection>
     </>
   );

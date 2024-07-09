@@ -17,14 +17,15 @@ import {
   export const ShowReviewSection = ({
     reviewList,
     addShowReview,
+    deleteShowReview
   }: IReviewListProps) => {
     return (
       <Flex>
         <Card width="600px">
           <CardBody>
-            <ReviewForm addShowReview={addShowReview} />
+            <ReviewForm addShowReview={addShowReview}  />
             <hr />
-            <ReviewList reviewList={reviewList} />
+            <ReviewList reviewList={reviewList} deleteShowReview={deleteShowReview}/>
           </CardBody>
         </Card>
       </Flex>
