@@ -77,7 +77,7 @@ export default function ShowContainer() {
 
   let [reviewItems, setReviewItems] = useState(Array <IReviewItem>);
 
-  const addShowReview = () => {
+  const addShowReview = (newReviewItem1: IReviewItem) => {
     const newReviewItem: IReviewItem = {
       reviewText: document.getElementById("reviewDescription").value,
       rating: parseInt(document.getElementById("reviewRating").value, 10),

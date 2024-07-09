@@ -10,8 +10,11 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
-import { IShow, IShowProps } from "../../../../../typings/show.type";
-import { IReviewItem } from "../../../../../typings/ReviewItem.type";
+import { IShow } from "../../../../../typings/Show.type";
+
+export interface IShowProps {
+  show: IShow;
+}
 
 export const ShowDetails = ({ show }: IShowProps) => {
   return (

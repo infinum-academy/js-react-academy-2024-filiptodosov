@@ -7,7 +7,3 @@ export interface IShow {
     averageRating?: number;
     reviewList: Array<IReviewItem>;
 }
-
-export interface IShowProps {
-    show: IShow;
-}

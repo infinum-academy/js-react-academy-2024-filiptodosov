@@ -3,18 +3,16 @@ import {
   Heading,
   Stack,
   StackDivider,
-  Textarea,
-  Box,
-  Text,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { ReviewItem } from "../ReviewItem/ReviewItem";
 
-import { IReviewListProps } from "../../../../../typings/ReviewList.type";
+import { IReviewList } from "../../../../../typings/ReviewList.type";
+
+export interface IReviewListProps {
+  reviewList?: IReviewList,
+  addShowReview: () => void,
+  removeShowReview: () => void
+}
 
 export const ReviewList = ({ reviewList }: IReviewListProps) => {
   return (
