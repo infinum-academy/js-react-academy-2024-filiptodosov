@@ -77,19 +77,11 @@ export default function ShowContainer() {
 
   let [reviewItems, setReviewItems] = useState(Array <IReviewItem>);
 
-  const addShowReview = (newReviewItem1: IReviewItem) => {
-    const newReviewItem: IReviewItem = {
-      reviewText: document.getElementById("reviewDescription").value,
-      rating: parseInt(document.getElementById("reviewRating").value, 10),
-    };
-
+  const addShowReview = (newReviewItem: IReviewItem) => {
     const newReviewItems = [...reviewItems, newReviewItem];
     if (newReviewItem.rating && newReviewItem.reviewText) {
       saveToLocalStorage(newReviewItems);
       setReviewItems(newReviewItems);
-
-      document.getElementById("reviewDescription").value = "";
-      document.getElementById("reviewRating").value = "";
 
       alert("New review has been added.");
     } else {

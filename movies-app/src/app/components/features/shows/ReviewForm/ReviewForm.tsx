@@ -19,6 +19,23 @@ interface IReviewFormProps {
 }
 
 export const ReviewForm = ({ addShowReview }: IReviewFormProps) => {
+
+  const onClickHandler = () => {
+    
+    const reviewDescriptionHTMLElement = document.getElementById("reviewDescription") as HTMLTextAreaElement;
+    const reviewRatingHTMLElement = document.getElementById("reviewRating") as HTMLInputElement;
+    const newReviewItem: IReviewItem = {
+      reviewText: reviewDescriptionHTMLElement.value,
+      rating: parseInt(reviewRatingHTMLElement.value, 10),
+    };
+
+    addShowReview(newReviewItem);
+
+
+    reviewDescriptionHTMLElement.value = "";
+    reviewRatingHTMLElement.value = "";
+  }
+
   return (
     <Box marginBottom={5}>
       <Heading size="md">Add a review</Heading>
@@ -39,7 +56,7 @@ export const ReviewForm = ({ addShowReview }: IReviewFormProps) => {
           <NumberDecrementStepper />
         </NumberInputStepper>
       </NumberInput>
-      <Button marginTop="2" colorScheme="blue" onClick={addShowReview}>
+      <Button marginTop="2" colorScheme="blue" onClick={onClickHandler}>
         Submit review
       </Button>
     </Box>
