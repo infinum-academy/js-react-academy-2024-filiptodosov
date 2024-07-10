@@ -78,7 +78,6 @@ export default function ShowContainer() {
   };
 
   useEffect(()=>{
-
     let reviewItemsLocal = loadFromLocalStorage();
     setReviewItems(reviewItemsLocal);
   }, []);

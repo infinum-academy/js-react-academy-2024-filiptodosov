@@ -65,7 +65,7 @@ export const ReviewForm = ({ addShowReview, successLabel, errorLabel }: IReviewF
       </Button>
       {successLabel && <Alert status='success'>
         <AlertIcon />
-        You've just added a new review!
+        You&apos;ve just added a new review!
       </Alert>}
 
       {errorLabel && <Alert status='error'>
