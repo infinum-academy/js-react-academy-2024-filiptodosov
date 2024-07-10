@@ -1,24 +1,26 @@
 import {
     Flex,
-    Heading,
     Card,
-    CardHeader,
     CardBody,
-    Stack,
-    StackDivider,
-    Box,
-    Text,
-    Image,
   } from "@chakra-ui/react";
   import { ReviewList } from "../../review/ReviewList/ReviewList";
   import { ReviewForm } from "../ReviewForm/ReviewForm";
-  import { IReviewListProps } from "../../../../../typings/ReviewList.type";
+  import { IReviewList } from "../../../../../typings/ReviewList.type";
+  import { IReviewItem } from "@/typings/ReviewItem.type";
   
+
+    export interface IShowReviewSectionProps {
+      reviewList: IReviewList,
+      addShowReview: (newReviewItem: IReviewItem) => void,
+      deleteShowReview: (key: number) => void
+  }
+
+
   export const ShowReviewSection = ({
     reviewList,
     addShowReview,
     deleteShowReview
-  }: IReviewListProps) => {
+  }: IShowReviewSectionProps) => {
     return (
       <Flex>
         <Card width="600px">
