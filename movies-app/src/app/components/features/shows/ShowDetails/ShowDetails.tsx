@@ -48,7 +48,7 @@ export const ShowDetails = ({ show }: IShowProps) => {
                 Average Rating
               </Heading>
               <Text pt="2" fontSize="sm">
-                {show.averageRating ? show.averageRating : "No rating."}
+                {show.averageRating ? `${show.averageRating}/5` : "No rating."}
               </Text>
             </Box>
           </Stack>

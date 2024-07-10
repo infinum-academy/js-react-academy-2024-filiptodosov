@@ -12,20 +12,24 @@ import {
     export interface IShowReviewSectionProps {
       reviewList: IReviewList,
       addShowReview: (newReviewItem: IReviewItem) => void,
-      deleteShowReview: (key: number) => void
+      deleteShowReview: (key: number) => void,
+      successLabel: Boolean,
+      errorLabel: Boolean
   }
 
 
   export const ShowReviewSection = ({
     reviewList,
     addShowReview,
-    deleteShowReview
+    deleteShowReview,
+    successLabel,
+    errorLabel
   }: IShowReviewSectionProps) => {
     return (
       <Flex>
         <Card width="600px">
           <CardBody>
-            <ReviewForm addShowReview={addShowReview}  />
+            <ReviewForm addShowReview={addShowReview} successLabel={successLabel} errorLabel={errorLabel}   />
             <hr />
             <ReviewList reviewList={reviewList} deleteShowReview={deleteShowReview}/>
           </CardBody>

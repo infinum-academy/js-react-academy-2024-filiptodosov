@@ -42,9 +42,10 @@ reviewItems:  [
 };
 
 export default function ShowContainer() {
-  let successLabel: Boolean = false;
-  let errorLabel: Boolean = false;
-  
+  let [reviewItems, setReviewItems] = useState(mockReviewItems);
+  let [successLabel, setSuccessLabel] = useState(false);
+  let [errorLabel, seterrorLabel] = useState(false);
+
   const loadFromLocalStorage = (): IReviewList => {
     let reviewItemsLocal: Array<IReviewItem> = JSON.parse(
       localStorage.getItem("reviewItems") as string
@@ -76,15 +77,11 @@ export default function ShowContainer() {
     return Math.round((sumOfReviews / reviewItems.reviewItems.length) * 10) / 10;
   };
 
-  let [reviewItems, setReviewItems] = useState(mockReviewItems);
-
   useEffect(()=>{
 
     let reviewItemsLocal = loadFromLocalStorage();
     setReviewItems(reviewItemsLocal);
   }, []);
-
-
 
   const addShowReview = (newReviewItem: IReviewItem) => {
     const newReviewItems = [...reviewItems.reviewItems, newReviewItem];
@@ -95,9 +92,11 @@ export default function ShowContainer() {
       saveToLocalStorage(newReviewList);
       setReviewItems(newReviewList);
 
-      alert("New review has been added.");
+      setSuccessLabel(true);
+      seterrorLabel(false);
     } else {
-      alert("Both fields are mandatory.");
+      seterrorLabel(true);
+      setSuccessLabel(false);
     }
   };
 
@@ -111,10 +110,7 @@ export default function ShowContainer() {
       }
 
       saveToLocalStorage(newReviewList);
-      setReviewItems(newReviewList);
-
-      alert("Item was deleted.");
-    
+      setReviewItems(newReviewList);    
   };
 
   let showExample: IShow = {
@@ -137,6 +133,9 @@ export default function ShowContainer() {
         reviewList={reviewItems}
         addShowReview={addShowReview} 
         deleteShowReview={deleteShowReview}
+        successLabel={successLabel}
+        errorLabel={errorLabel}
+      
       ></ShowReviewSection>
     </>
   );
