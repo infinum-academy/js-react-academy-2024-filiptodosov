@@ -10,7 +10,7 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
-import { IShow } from "../../../../../typings/Show.type";
+import { IShow } from "../../../../typings/Show.type";
 
 export interface IShowProps {
   show: IShow;

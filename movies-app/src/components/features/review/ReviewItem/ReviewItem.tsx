@@ -1,5 +1,5 @@
 import { Heading, Box, Text, Button } from '@chakra-ui/react'
-import { IReviewItem } from "../../../../../typings/ReviewItem.type";
+import { IReviewItem } from "../../../../typings/ReviewItem.type";
 
 export interface IReviewItemProps {
     reviewItem: IReviewItem,

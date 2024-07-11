@@ -14,7 +14,7 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 
-import { IReviewItem } from "../../../../../typings/ReviewItem.type";
+import { IReviewItem } from "../../../../typings/ReviewItem.type";
 
 interface IReviewFormProps {
   addShowReview: (reviewItem: IReviewItem) => void,

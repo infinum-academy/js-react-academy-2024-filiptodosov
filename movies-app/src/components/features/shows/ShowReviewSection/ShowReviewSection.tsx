@@ -5,7 +5,7 @@ import {
   } from "@chakra-ui/react";
   import { ReviewList } from "../../review/ReviewList/ReviewList";
   import { ReviewForm } from "../ReviewForm/ReviewForm";
-  import { IReviewList } from "../../../../../typings/ReviewList.type";
+  import { IReviewList } from "../../../../typings/ReviewList.type";
   import { IReviewItem } from "@/typings/ReviewItem.type";
   
 

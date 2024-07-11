@@ -3,12 +3,16 @@
 import { ShowDetails } from "../ShowDetails/ShowDetails";
 import { ShowReviewSection } from "../ShowReviewSection/ShowReviewSection";
 
-import { IReviewItem } from "../../../../../typings/ReviewItem.type";
+import { IReviewItem } from "../../../../typings/ReviewItem.type";
 
 
 import React, { useEffect, useState } from "react";
 import { IShow } from "@/typings/Show.type";
 import { IReviewList } from "@/typings/ReviewList.type";
+import { getShow } from "@/fetchers/show";
+import useSWR from "swr";
+import { useParams } from "next/navigation";
+import { Alert, AlertIcon, Spinner } from "@chakra-ui/react";
 
 
 const mockReviewItems: IReviewList = {
@@ -41,10 +45,30 @@ reviewItems:  [
 ]
 };
 
+// let showExample: IShow = {
+//   id: "1",
+//   image_url:
+//     "https://i0.wp.com/commonslibrary.org/wp-content/uploads/brooklyn99-s6-lrg.jpg?fit=533%2C300&ssl=1",
+//   title: "Brooklyn Nine-Nine",
+//   description:
+//     "Comedy series following the exploits of Det. Jake Peralta and his diverse, lovable colleagues as they police the NYPD's 99th Precinct.",
+//   reviewList: reviewItems,
+//   averageRating: calculateAverageRating(reviewItems),
+// }
+
 export default function ShowContainer() {
+  const params = useParams();
+
+  const { data, error, isLoading }  = useSWR(`/api/shows/${params.id}`, ()=>getShow(params.id as string));
+
+  
+
+  const show: IShow = data;
+
   let [reviewItems, setReviewItems] = useState(mockReviewItems);
   let [successLabel, setSuccessLabel] = useState(false);
   let [errorLabel, seterrorLabel] = useState(false);
+
 
   const loadFromLocalStorage = (): IReviewList => {
     let reviewItemsLocal: Array<IReviewItem> = JSON.parse(
@@ -76,6 +100,7 @@ export default function ShowContainer() {
 
     return Math.round((sumOfReviews / reviewItems.reviewItems.length) * 10) / 10;
   };
+
 
   useEffect(()=>{
     let reviewItemsLocal = loadFromLocalStorage();
@@ -112,20 +137,21 @@ export default function ShowContainer() {
       setReviewItems(newReviewList);    
   };
 
-  let showExample: IShow = {
-    image_url:
-      "https://i0.wp.com/commonslibrary.org/wp-content/uploads/brooklyn99-s6-lrg.jpg?fit=533%2C300&ssl=1",
-    title: "Brooklyn Nine-Nine",
-    description:
-      "Comedy series following the exploits of Det. Jake Peralta and his diverse, lovable colleagues as they police the NYPD's 99th Precinct.",
-    reviewList: reviewItems,
-    averageRating: calculateAverageRating(reviewItems),
+  if(error){
+    return (<Alert status='error'>
+        <AlertIcon />
+        There was an error processing your request
+      </Alert>)
+  }
+
+  if(isLoading){
+    return (  <Spinner size='xl' />)
   }
 
   return (
     <>
       <ShowDetails
-        show={showExample}
+        show={show}
       ></ShowDetails>
       
       <ShowReviewSection
