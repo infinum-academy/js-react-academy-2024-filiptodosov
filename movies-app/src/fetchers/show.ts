@@ -9,6 +9,9 @@ export function getShows(){
     return  fetcher <IShowsResponse>("/api/shows");
 }
 
+export function getTopShows(){
+    return  fetcher <IShowsResponse>("/api/shows/top-rated");
+}
 
 export function getShow(id: string){
     return  fetcher <IShow>(`/api/shows/${id}`);

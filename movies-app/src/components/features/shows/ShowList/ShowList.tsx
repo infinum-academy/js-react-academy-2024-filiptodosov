@@ -2,11 +2,16 @@
 
 import ShowCard from "@/components/features/shows/ShowCard/ShowCard";
 import { Alert, AlertIcon, Flex, Heading, Spinner } from "@chakra-ui/react";
-import { getShows } from "@/fetchers/show";
+import { getShows, getTopShows } from "@/fetchers/show";
 import useSWR from "swr";
 
-export default function ShowList() {
-  const { data, error, isLoading }  = useSWR('/api/shows', getShows);
+interface IShowList {
+    topRated: boolean
+}
+
+export default function ShowList({topRated}: IShowList) {
+    console.log(topRated);
+  const { data, error, isLoading }  = useSWR('/api/shows', topRated ? getTopShows : getShows);
 
   const shows = data?.shows || [];
 
