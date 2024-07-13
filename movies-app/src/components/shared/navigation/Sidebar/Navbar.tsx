@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Flex,
-  Link,
-  Button,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Flex, Link, Button, useColorModeValue } from "@chakra-ui/react";
 
 export const Navbar = () => {
   const bg = useColorModeValue("gray.100", "gray.900");
