@@ -6,7 +6,7 @@ import {
   Stack,
   StackDivider,
 } from "@chakra-ui/react";
-import { ReviewItem } from "../ReviewItem/ReviewItem";
+import ReviewItem from "../ReviewItem/ReviewItem";
 
 import { IReviewList } from "../../../../typings/ReviewList.type";
 

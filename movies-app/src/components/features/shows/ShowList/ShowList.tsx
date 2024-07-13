@@ -1,9 +1,8 @@
 "use client";
-
-import ShowCard from "@/components/features/shows/ShowCard/ShowCard";
 import { Alert, AlertIcon, Flex, Heading, Spinner } from "@chakra-ui/react";
 import { getShows, getTopShows } from "@/fetchers/show";
 import useSWR from "swr";
+import ShowCard from "../ShowCard/ShowCard";
 
 interface IShowList {
   topRated: boolean;
@@ -30,6 +29,8 @@ export default function ShowList({ topRated }: IShowList) {
     <Flex flexDirection="column" gap={3}>
       {shows.map((show) => {
         return <ShowCard key={show.id} show={show} />;
+
+
       })}
     </Flex>
   );
