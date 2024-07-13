@@ -6,34 +6,31 @@ import { getShows, getTopShows } from "@/fetchers/show";
 import useSWR from "swr";
 
 interface IShowList {
-    topRated: boolean
+  topRated: boolean;
 }
 
-export default function ShowList({topRated}: IShowList) {
-    console.log(topRated);
-  const { data, error, isLoading }  = useSWR('/api/shows', topRated ? getTopShows : getShows);
-
+export default function ShowList({ topRated }: IShowList) {
+  const { data, error, isLoading } = useSWR(
+    "/api/shows",
+    topRated ? getTopShows : getShows
+  );
   const shows = data?.shows || [];
-
-  if(error){
-    return (<Alert status='error'>
+  if (error) {
+    return (
+      <Alert status="error">
         <AlertIcon />
         There was an error processing your request
-      </Alert>)
+      </Alert>
+    );
   }
-
-
-  if(isLoading){
-    return (  <Spinner size='xl' />)
+  if (isLoading) {
+    return <Spinner size="xl" />;
   }
-
   return (
-      <Flex flexDirection="column" gap={3}>
-
-        {
-        shows.map((show) => {
-       return <ShowCard key={show.id} show={show}/>
-        })}
-      </Flex>
+    <Flex flexDirection="column" gap={3}>
+      {shows.map((show) => {
+        return <ShowCard key={show.id} show={show} />;
+      })}
+    </Flex>
   );
 }
