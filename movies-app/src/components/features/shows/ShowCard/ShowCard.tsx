@@ -27,14 +27,18 @@ export default function ShowCard({show}: IShowCardProps) {
           maxW={{ base: '100%', sm: '200px' }}
           src={show.image_url}
           alt='Show thumbnail'
+          role="image-thumbnail"
         />
       
         <Stack>
           <CardBody>
-            <Heading size='md'>{show.title}</Heading>
+            <Heading size='md' role="show-title">{show.title}</Heading>
       
-            <Text py='2'>
+            <Text py='2' role="show-description">
               {show.description}
+            </Text>
+            <Text py='2' role="show-average-rating"> 
+              {show.averageRating}/5
             </Text>
           </CardBody>
       

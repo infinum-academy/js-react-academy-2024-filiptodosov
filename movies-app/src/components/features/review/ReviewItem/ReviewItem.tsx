@@ -7,22 +7,23 @@ export interface IReviewItemProps {
   deleteShowReview: (key: number) => void;
 }
 
-export const ReviewItem = ({
+
+export default function ReviewItem ({
   reviewItem,
   deleteShowReview,
   index,
-}: IReviewItemProps) => {
+}: IReviewItemProps) {
   const onClickHandler = () => {
     deleteShowReview(index);
   };
 
   return (
     <Box>
-      <Heading size="xs">{reviewItem.reviewText}</Heading>
-      <Text pt="2" fontSize="sm">
+      <Heading size="xs" role="review-description">{reviewItem.reviewText}</Heading>
+      <Text pt="2" fontSize="sm" role="review-rating">
         {reviewItem.rating}/5
       </Text>
-      <Button onClick={onClickHandler}>Delete</Button>
+      <Button role="delete-review-button" onClick={onClickHandler}>Delete</Button>
     </Box>
   );
 };
