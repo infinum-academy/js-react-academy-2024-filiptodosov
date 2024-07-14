@@ -1,5 +1,4 @@
 export async function fetcher<T>(input: string | URL | globalThis.Request, init?: RequestInit): Promise<T> {
-    const url = "https://example.org/products.json";
 
     try {
       const response = await fetch(input, init);
