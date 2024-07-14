@@ -1,8 +1,8 @@
 "use client";
 
-import { Alert, AlertIcon, Button, chakra, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input } from "@chakra-ui/react"
+import {  Button, chakra,  FormControl, FormErrorMessage, FormLabel, Heading, Input } from "@chakra-ui/react"
 import { useForm } from "react-hook-form"
-import { mutator } from "@/fetchers/mutators";
+import { loginMutator, mutator } from "@/fetchers/mutators";
 import useSWRMutation from "swr/mutation";
 import { swrKeys } from "@/fetchers/swrKeys";
 
@@ -14,7 +14,7 @@ interface ILoginFormInputs {
 
 export const LoginForm = () => {
     const { register, handleSubmit } = useForm<ILoginFormInputs>();
-    const {trigger} = useSWRMutation(swrKeys.login, mutator
+    const {trigger} = useSWRMutation(swrKeys.login, loginMutator
     );
 
     const onLogin = async (data:ILoginFormInputs) => {
