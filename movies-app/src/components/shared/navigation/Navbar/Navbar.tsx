@@ -12,6 +12,9 @@ export const Navbar = () => {
         <Button variant="solid" colorScheme="blue" as={Link} href={`/shows`}>
           Home
         </Button>
+        <Button variant="solid" colorScheme="blue" as={Link} href={`/shows/top-rated`}>
+          Top-rated shows
+        </Button>
         <Flex justifyContent={"space-between"}>
           <Button variant="solid" colorScheme="blue" as={Link} href={`/`}>
             My Profile
