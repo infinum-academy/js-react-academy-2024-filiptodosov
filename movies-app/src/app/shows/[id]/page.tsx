@@ -7,8 +7,8 @@ import styles from "../../page.module.css";
 
 export default function Show() {
   return (
-    <main className={styles.main}>
+    <>
       <ShowContainer />
-    </main>
+    </>
   );
 }

@@ -32,12 +32,12 @@ export default function ShowCard({show}: IShowCardProps) {
       
         <Stack>
           <CardBody>
-            <Heading size='md' role="show-title">{show.title}</Heading>
+            <Heading size='md' data-test-id="show-title">{show.title}</Heading>
       
-            <Text py='2' role="show-description">
+            <Text py='2' data-test-id="show-description">
               {show.description}
             </Text>
-            <Text py='2' role="show-average-rating"> 
+            <Text py='2' data-test-id="show-average-rating"> 
               {show.averageRating}/5
             </Text>
           </CardBody>

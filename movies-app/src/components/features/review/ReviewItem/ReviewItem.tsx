@@ -18,12 +18,12 @@ export default function ReviewItem ({
   };
 
   return (
-    <Box>
-      <Heading size="xs" role="review-description">{reviewItem.reviewText}</Heading>
-      <Text pt="2" fontSize="sm" role="review-rating">
-        {reviewItem.rating}/5
-      </Text>
-      <Button role="delete-review-button" onClick={onClickHandler}>Delete</Button>
-    </Box>
+        <>
+          <Heading size="xs" data-test-id="review-description">{reviewItem.reviewText}</Heading>
+          <Text pt="2" fontSize="sm" data-test-id="review-rating">
+            {reviewItem.rating}/5
+          </Text>
+          <Button data-test-id="delete-review-button" onClick={onClickHandler}>Delete</Button>
+      </>
   );
 };

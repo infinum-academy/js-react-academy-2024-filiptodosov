@@ -18,7 +18,6 @@ export interface IShowProps {
 
 export const ShowDetails = ({ show }: IShowProps) => {
   return (
-    <Flex marginBottom="10">
       <Card width="100%">
         <CardHeader>
           <Heading size="lg">{show.title}</Heading>
@@ -54,6 +53,5 @@ export const ShowDetails = ({ show }: IShowProps) => {
           </Stack>
         </CardBody>
       </Card>
-    </Flex>
   );
 };

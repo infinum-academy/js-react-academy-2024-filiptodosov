@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Providers } from "./providers";
-import Navbar from "@/components/shared/navigation/Sidebar/Navbar";
+import Navbar from "@/components/shared/navigation/Navbar/Navbar";
+import styles from "@/app/page.module.css";
 
 export const metadata: Metadata = {
   title: "TV Shows App",
@@ -18,7 +19,9 @@ export default function RootLayout({
         {
           <Providers>
             <Navbar />
+            <main className={styles.main}>
             {children}
+            </main>
           </Providers>
         }
       </body>

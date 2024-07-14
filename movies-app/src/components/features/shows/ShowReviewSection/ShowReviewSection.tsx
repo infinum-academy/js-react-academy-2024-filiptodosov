@@ -1,5 +1,6 @@
 import {
     Flex,
+    useToast,
     Card,
     CardBody,
   } from "@chakra-ui/react";
@@ -13,8 +14,6 @@ import {
       reviewList: IReviewList,
       addShowReview: (newReviewItem: IReviewItem) => void,
       deleteShowReview: (key: number) => void,
-      successLabel: Boolean,
-      errorLabel: Boolean
   }
 
 
@@ -22,19 +21,15 @@ import {
     reviewList,
     addShowReview,
     deleteShowReview,
-    successLabel,
-    errorLabel
   }: IShowReviewSectionProps) => {
     return (
-      <Flex>
-        <Card width="600px">
+        <Card width="600px" marginTop={10}>
           <CardBody>
-            <ReviewForm addShowReview={addShowReview} successLabel={successLabel} errorLabel={errorLabel}   />
+            <ReviewForm addShowReview={addShowReview} />
             <hr />
             <ReviewList reviewList={reviewList} deleteShowReview={deleteShowReview}/>
           </CardBody>
         </Card>
-      </Flex>
     );
   };
   

@@ -11,7 +11,7 @@ import { IReviewList } from "@/typings/ReviewList.type";
 import { getShow } from "@/fetchers/show";
 import useSWR from "swr";
 import { useParams } from "next/navigation";
-import { Alert, AlertIcon, Spinner } from "@chakra-ui/react";
+import { Alert, AlertIcon, Spinner, useToast } from "@chakra-ui/react";
 
 const mockReviewItems: IReviewList = {
   reviewItems: [
@@ -44,14 +44,14 @@ const mockReviewItems: IReviewList = {
 };
 
 export default function ShowContainer() {
+  const toast = useToast();
   const params = useParams();
   const { data, error, isLoading } = useSWR(`/api/shows/${params.id}`, () =>
     getShow(params.id as string)
   );
   const show: IShow = data;
   let [reviewItems, setReviewItems] = useState(mockReviewItems);
-  let [successLabel, setSuccessLabel] = useState(false);
-  let [errorLabel, seterrorLabel] = useState(false);
+
   const loadFromLocalStorage = (): IReviewList => {
     let reviewItemsLocal: Array<IReviewItem> = JSON.parse(
       localStorage.getItem("reviewItems") as string
@@ -89,11 +89,22 @@ export default function ShowContainer() {
       };
       saveToLocalStorage(newReviewList);
       setReviewItems(newReviewList);
-      setSuccessLabel(true);
-      seterrorLabel(false);
+
+      toast({
+        title: 'New revied added!',
+        description: "You've successfully added a new review.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
     } else {
-      seterrorLabel(true);
-      setSuccessLabel(false);
+      toast({
+        title: 'Oops.',
+        description: "Both fields are required.",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
   const deleteShowReview = (key: number) => {
@@ -123,8 +134,6 @@ export default function ShowContainer() {
         reviewList={reviewItems}
         addShowReview={addShowReview}
         deleteShowReview={deleteShowReview}
-        successLabel={successLabel}
-        errorLabel={errorLabel}
       ></ShowReviewSection>
     </>
   );

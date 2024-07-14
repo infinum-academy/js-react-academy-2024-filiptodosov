@@ -18,11 +18,9 @@ import { IReviewItem } from "../../../../typings/ReviewItem.type";
 
 interface IReviewFormProps {
   addShowReview: (reviewItem: IReviewItem) => void,
-  successLabel: Boolean,
-  errorLabel: Boolean
 }
 
-export const ReviewForm = ({ addShowReview, successLabel, errorLabel }: IReviewFormProps) => {
+export const ReviewForm = ({ addShowReview }: IReviewFormProps) => {
 
   const onClickAddShowHandler = () => {
     
@@ -63,15 +61,6 @@ export const ReviewForm = ({ addShowReview, successLabel, errorLabel }: IReviewF
       <Button marginTop={2} marginBottom={2} colorScheme="blue" onClick={onClickAddShowHandler}>
         Submit review
       </Button>
-      {successLabel && <Alert status='success'>
-        <AlertIcon />
-        You&apos;ve just added a new review!
-      </Alert>}
-
-      {errorLabel && <Alert status='error'>
-        <AlertIcon />
-        The review text and the rating fields are mandatory!
-      </Alert>}
     </Box>
   );
 };
