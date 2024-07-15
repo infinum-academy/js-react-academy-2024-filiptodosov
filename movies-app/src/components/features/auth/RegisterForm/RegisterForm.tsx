@@ -1,6 +1,6 @@
 "use client";
 
-import { Alert, AlertIcon, Button, chakra, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input } from "@chakra-ui/react"
+import { Alert, AlertIcon, Button, chakra, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from "@chakra-ui/react"
 import { useForm } from "react-hook-form"
 import { mutator } from "@/fetchers/mutators";
 import useSWRMutation from "swr/mutation";
@@ -15,6 +15,8 @@ interface IRegisterFormInputs {
 
 
 export const RegisterForm = () => {
+    const toast = useToast();
+    
     const [passwordsDoNotMatch, setpasswordsDoNotMatch] = useState(false);
     const [isRegistered, setisRegistered] = useState(false);
 
@@ -22,6 +24,16 @@ export const RegisterForm = () => {
     const {trigger} = useSWRMutation(swrKeys.register, mutator, {
         onSuccess: ()=>{
             setisRegistered(true);
+        },
+        onError: (error) => {
+
+            toast({
+                title: 'Oops!',
+                description: error.message,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+              });
         }
     });
 
@@ -63,7 +75,3 @@ export const RegisterForm = () => {
         </>
     )
 }
-
-
-
-

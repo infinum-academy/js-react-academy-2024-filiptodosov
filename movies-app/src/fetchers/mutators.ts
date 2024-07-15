@@ -9,7 +9,7 @@ export async function mutator(url: string, { arg }: { arg: any}) {
 
   const responseBody = await response.json();
   if(!response.ok){
-    throw new Error (`Error happened: ${response}`)
+    throw new Error (responseBody.errors);
   }
 
   return responseBody;
@@ -27,7 +27,7 @@ export async function mutator(url: string, { arg }: { arg: any}) {
  
    const responseBody = await response.json();
    if(!response.ok){
-     throw new Error (`Error happened: ${response}`)
+      throw new Error (responseBody.errors);
    }
        const accessToken = response.headers.get("access-token");
       const client = response.headers.get("client");
@@ -35,9 +35,9 @@ export async function mutator(url: string, { arg }: { arg: any}) {
       const uid = response.headers.get("uid");
 
     const authData = {
-    accessToken,
+    "access-token": accessToken,
     client,
-    tokenType,
+    "token-type": tokenType,
     uid
     }
 

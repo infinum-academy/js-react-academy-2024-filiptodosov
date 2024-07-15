@@ -1,8 +1,10 @@
 "use client";
 
-import styles from "./page.module.css";
+import { AuthRedirect } from "@/components/shared/AuthRedirect/AuthRedirect";
+
 
 export default function Home() {
-  <>
-  </>  
+  return (
+    <AuthRedirect />
+  );
 }

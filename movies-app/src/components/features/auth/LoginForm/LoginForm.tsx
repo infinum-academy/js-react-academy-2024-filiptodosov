@@ -1,6 +1,6 @@
 "use client";
 
-import {  Button, chakra,  FormControl, FormErrorMessage, FormLabel, Heading, Input } from "@chakra-ui/react"
+import {  Button, chakra,  FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from "@chakra-ui/react"
 import { useForm } from "react-hook-form"
 import { loginMutator, mutator } from "@/fetchers/mutators";
 import useSWRMutation from "swr/mutation";
@@ -13,8 +13,21 @@ interface ILoginFormInputs {
 
 
 export const LoginForm = () => {
+    const toast = useToast();
+
     const { register, handleSubmit } = useForm<ILoginFormInputs>();
-    const {trigger} = useSWRMutation(swrKeys.login, loginMutator
+    const {trigger} = useSWRMutation(swrKeys.login, loginMutator, {
+        onError: (error) => {
+
+            toast({
+                title: 'Oops!',
+                description: error.message,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+              });
+        }
+    }
     );
 
     const onLogin = async (data:ILoginFormInputs) => {
