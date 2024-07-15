@@ -18,11 +18,19 @@ export const LoginForm = () => {
     const { register, handleSubmit } = useForm<ILoginFormInputs>();
     const {trigger} = useSWRMutation(swrKeys.login, loginMutator, {
         onError: (error) => {
-
             toast({
                 title: 'Oops!',
                 description: error.message,
                 status: 'error',
+                duration: 5000,
+                isClosable: true,
+              });
+        },
+        onSuccess: () => {
+            toast({
+                title: 'Yay!',
+                description: "You have successfully logged in. You will be redirected to the shows page.",
+                status: 'success',
                 duration: 5000,
                 isClosable: true,
               });
