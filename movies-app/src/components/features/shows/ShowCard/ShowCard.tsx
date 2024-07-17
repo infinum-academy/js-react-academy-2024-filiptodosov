@@ -38,7 +38,8 @@ export default function ShowCard({show}: IShowCardProps) {
               {show.description}
             </Text>
             <Text py='2' data-test-id="show-average-rating"> 
-              {show.averageRating}/5
+              {show.averageRating ? show.averageRating/5 : "No rating available."}
+
             </Text>
           </CardBody>
       

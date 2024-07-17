@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Providers } from "./providers";
 import Navbar from "@/components/shared/navigation/Navbar/Navbar";
 import styles from "@/app/page.module.css";
+import { AuthRedirect } from "@/components/shared/AuthRedirect/AuthRedirect";
 
 export const metadata: Metadata = {
   title: "TV Shows App",

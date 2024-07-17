@@ -6,22 +6,28 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
 
-export const AuthRedirect = () => {
-    const { data, isLoading, error } = useSWR(swrKeys.myProfile, getMyProfile);
+interface IAuthRedirectProps {
+    to: string;
+    condition: 'loggedIn' | 'loggedOut';
+  }
+  
+
+export const AuthRedirect = ({ to, condition }: IAuthRedirectProps) => {
     const router = useRouter();
-    const toast = useToast();
-
-    useEffect(()=> {
-        if (!isLoading && !data) {
-            toast({
-                title: 'Oops!',
-                description: "You are not logged in. You will be redirected to the login page.",
-                status: 'error',
-                duration: 5000,
-                isClosable: true,
-              });
-            router.push("/login");
-        }
-
-    }, [data, router, isLoading, toast])
-}
+    const { data, isLoading } = useSWR(swrKeys.myProfile, getMyProfile);
+  
+    useEffect(() => {      
+      if (isLoading) {
+        return;
+      }
+      if (!data && condition === 'loggedOut') {
+        router.push(to);
+      }
+  
+      if (data && condition === 'loggedIn') {
+        router.push(to);
+      }
+    }, [data, isLoading, router, condition, to]);
+  
+    return null;
+  };

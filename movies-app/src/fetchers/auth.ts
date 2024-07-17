@@ -8,9 +8,13 @@ interface IMyProfileResponse {
     user: IUser
 }
 
-export function getMyProfile(){
+export function getAuthHeaders(){
     const auth:string = localStorage.getItem("auth");
     const authHeaders = JSON.parse(auth);
+    return authHeaders;
+}
 
+export function getMyProfile(){
+    const authHeaders = getAuthHeaders();
     return  fetcher <IMyProfileResponse>(swrKeys.myProfile, {headers: authHeaders});
 }

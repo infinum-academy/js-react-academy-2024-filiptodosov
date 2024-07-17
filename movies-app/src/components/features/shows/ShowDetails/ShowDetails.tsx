@@ -19,9 +19,10 @@ export interface IShowProps {
 export const ShowDetails = ({ show }: IShowProps) => {
   return (
       <Card width="100%">
-        <CardHeader>
+        <CardHeader display="flex" flexDirection="column" alignItems="center">
           <Heading size="lg">{show.title}</Heading>
           <Image
+            maxWidth="30%"
             src={
               show.image_url
                 ? show.image_url

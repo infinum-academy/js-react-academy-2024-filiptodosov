@@ -1,18 +1,36 @@
 import { IShow } from "@/typings/Show.type";
 import { fetcher } from "./fetcher";
+import { getAuthHeaders } from "./auth";
+import { swrKeys } from "./swrKeys";
+import { IReviewItem } from "@/typings/ReviewItem.type";
 
 interface IShowsResponse {
     shows: Array<IShow>
 }
+interface IShowResponse {
+    show: IShow
+}
+
+interface IReviewResponse{
+    reviews: Array<IReviewItem>
+}
 
 export function getShows(){
-    return  fetcher <IShowsResponse>("/api/shows");
+    const authHeaders = getAuthHeaders();
+    return  fetcher <IShowsResponse>(swrKeys.shows, {headers: authHeaders});
 }
 
 export function getTopShows(){
-    return  fetcher <IShowsResponse>("/api/shows/top-rated");
+    const authHeaders = getAuthHeaders();
+    return  fetcher <IShowsResponse>(swrKeys.topRatedShows, {headers: authHeaders});
 }
 
 export function getShow(id: string){
-    return  fetcher <IShow>(`/api/shows/${id}`);
+    const authHeaders = getAuthHeaders();
+    return  fetcher <IShowResponse>(`${swrKeys.shows}/${id}`, {headers: authHeaders});
+}
+
+export function getShowReviews(id: string){
+    const authHeaders = getAuthHeaders();
+    return  fetcher <IReviewResponse>(`${swrKeys.shows}/${id}/reviews`, {headers: authHeaders});
 }

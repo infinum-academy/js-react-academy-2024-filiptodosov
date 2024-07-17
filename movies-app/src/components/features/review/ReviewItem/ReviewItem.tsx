@@ -19,7 +19,7 @@ export default function ReviewItem ({
 
   return (
         <>
-          <Heading size="xs" data-test-id="review-description">{reviewItem.reviewText}</Heading>
+          <Heading size="xs" data-test-id="review-description">{reviewItem.comment}</Heading>
           <Text pt="2" fontSize="sm" data-test-id="review-rating">
             {reviewItem.rating}/5
           </Text>
