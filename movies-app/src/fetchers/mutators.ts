@@ -1,3 +1,6 @@
+import { IReviewItem, IReviewItemNew } from "@/typings/ReviewItem.type";
+import { getAuthHeaders } from "./auth";
+
 export async function mutator(url: string, { arg }: { arg: any}) {
    const response =  await fetch(url, {
     method: 'POST',
@@ -45,3 +48,23 @@ export async function mutator(url: string, { arg }: { arg: any}) {
  
    return responseBody;
    }
+
+   export async function reviewsMutator(url: string, { arg }: { arg: IReviewItemNew}) {
+   const authHeaders = getAuthHeaders();
+    
+   const response =  await fetch(url, {
+    method: 'POST',
+    headers: {
+        ...authHeaders,
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(arg)
+  });
+
+  const responseBody = await response.json();
+  if(!response.ok){
+    throw new Error (responseBody.errors);
+  }
+
+  return responseBody;
+  }

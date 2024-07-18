@@ -12,6 +12,7 @@ import { getShow, getShowReviews } from "@/fetchers/show";
 import useSWR from "swr";
 import { useParams } from "next/navigation";
 import { Alert, AlertIcon, Spinner, useToast } from "@chakra-ui/react";
+import { swrKeys } from "@/fetchers/swrKeys";
 
 interface IShowResponse {
   show: IShow
@@ -53,11 +54,11 @@ export default function ShowContainer() {
   const [reviewsList, setReviewsList] = useState(mockReviewItems);
   const { data, error, isLoading } = useSWR(`/api/shows/${params.id}`, ()=> getShow(params.id as string));
 
-  const { data: reviewsData, error: reviewsError, isLoading: reviewsIsLoading } = useSWR(`/api/shows/${params.id}/reviews`, ()=> getShowReviews(params.id as string));
+  const { data: reviewsData, error: reviewsError, isLoading: reviewsIsLoading } = useSWR(swrKeys.showReviews(params.id as string), ()=> getShowReviews(params.id as string));
 
   console.log(reviewsData);
 
-  const show = data?.show;
+  const show: IShow = data?.show;
 
   useEffect(()=>{
     if(reviewsData){
