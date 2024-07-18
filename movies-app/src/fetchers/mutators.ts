@@ -68,3 +68,22 @@ export async function mutator(url: string, { arg }: { arg: any}) {
 
   return responseBody;
   }
+
+
+  export async function reviewsDeleteMutator(url: string, { arg }: { arg: IReviewItemNew}) {
+    const authHeaders = getAuthHeaders();
+     
+    const response =  await fetch(url, {
+     method: 'DELETE',
+     headers: {
+         ...authHeaders,
+         "Content-Type": "application/json"
+     }
+   });
+ 
+   if(!response.ok){
+     throw new Error ();
+   }
+ 
+   return;
+   }

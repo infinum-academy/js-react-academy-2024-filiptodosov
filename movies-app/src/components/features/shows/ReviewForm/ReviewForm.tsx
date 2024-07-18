@@ -79,7 +79,7 @@ return (
   </FormControl>
     <FormControl isRequired={true}>
       <FormLabel>Rating:</FormLabel>
-        <NumberInput step={0.5} min={0} max={5} defaultValue={5}>
+        <NumberInput step={1} min={0} max={5} defaultValue={5}>
           <NumberInputField   {...register("rating")} />
           <NumberInputStepper>
             <NumberIncrementStepper />
