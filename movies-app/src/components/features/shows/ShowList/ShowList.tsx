@@ -29,8 +29,6 @@ export default function ShowList({ topRated }: IShowList) {
     <Flex flexDirection="column" gap={3}>
       {shows.map((show) => {
         return <ShowCard key={show.id} show={show} />;
-
-
       })}
     </Flex>
   );
