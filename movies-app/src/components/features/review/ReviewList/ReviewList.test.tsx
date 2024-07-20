@@ -3,9 +3,8 @@ import { render } from "@testing-library/react";
 import { ReviewList } from "./ReviewList";
 import ReviewItem from "../ReviewItem/ReviewItem";
 
-// Mocking ReviewItem
 jest.mock("../ReviewItem/ReviewItem", () => {
-    return jest.fn().mockReturnValue(null); // Mocking it to return a null component
+    return jest.fn().mockReturnValue(null); 
 });
 
 const mockReviewList = {
