@@ -51,7 +51,7 @@ export default function ReviewItem ({
           <Text pt="2" fontSize="sm" data-test-id="review-rating">
             {reviewItem.rating}/5
           </Text>
-          <Button data-test-id="delete-review-button" onClick={onSubmit}>Delete</Button>
+          <Button data-testid="delete-review-button" onClick={onSubmit}>Delete</Button>
       </>
   );
 };
