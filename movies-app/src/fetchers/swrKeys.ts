@@ -5,5 +5,8 @@ export const swrKeys = {
     login: `${apiUrl}/users/sign_in`,
     myProfile: `${apiUrl}/users/me`,
     shows: `${apiUrl}/shows`,
-    topRatedShows: `${apiUrl}/shows/top_rated`
+    topRatedShows: `${apiUrl}/shows/top_rated`,
+    showReviews: (show_id: string) => `${apiUrl}/shows/${show_id}/ratings`,
+    reviews: `${apiUrl}/reviews`,
+    showReview: (show_id: string) => `${apiUrl}/shows/${show_id}/ratings`
 } 

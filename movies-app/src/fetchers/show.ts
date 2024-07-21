@@ -3,6 +3,7 @@ import { fetcher } from "./fetcher";
 import { getAuthHeaders } from "./auth";
 import { swrKeys } from "./swrKeys";
 import { IReviewItem } from "@/typings/ReviewItem.type";
+import { mutator } from "./mutators";
 
 interface IShowsResponse {
     shows: Array<IShow>
