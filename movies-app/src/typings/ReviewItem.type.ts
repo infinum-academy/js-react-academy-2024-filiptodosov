@@ -1,4 +1,6 @@
 export interface IReviewItem {
-    reviewText: string,
-    rating: number
+    comment: string,
+    rating: number,
+    show_id?: number,
+    id?: string
 }
